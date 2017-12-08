@@ -149,6 +149,7 @@ describe('Firestore', () => {
 
     it('should return a string when project ID is present in environment', () => {
       process.env.GCLOUD_PROJECT = 'env-project-id';
+      process.env.GOOGLE_APPLICATION_CREDENTIALS = path.resolve(__dirname, '../../resources/mock.key.json');
       expect((new FirestoreService(defaultCredentialApp).client as any).projectId).to.equal('env-project-id');
     });
   });
