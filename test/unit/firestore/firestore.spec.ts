@@ -18,6 +18,7 @@
 
 import * as _ from 'lodash';
 import {expect} from 'chai';
+import path = require('path');
 
 import * as mocks from '../../resources/mocks';
 import {FirebaseApp} from '../../../src/firebase-app';
@@ -104,6 +105,7 @@ describe('Firestore', () => {
     it('should not throw given application default credentials without project ID', () => {
       // Project ID not set in the environment.
       delete process.env.GCLOUD_PROJECT;
+      process.env.GOOGLE_APPLICATION_CREDENTIALS = path.resolve(__dirname, '../../resources/mock.key.json');
       expect(() => {
         return new FirestoreService(defaultCredentialApp);
       }).not.to.throw();
