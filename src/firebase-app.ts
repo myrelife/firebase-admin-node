@@ -25,7 +25,7 @@ import {AppErrorCodes, FirebaseAppError} from './utils/error';
 import {Auth} from './auth/auth';
 import {Messaging} from './messaging/messaging';
 import {Storage} from './storage/storage';
-import {Database} from '@firebase/database';
+import {FirebaseDatabase} from '@firebase/database-types';
 import {DatabaseService} from './database/database';
 import {Firestore} from '@google-cloud/firestore';
 import {FirestoreService} from './firestore/firestore';
@@ -295,9 +295,9 @@ export class FirebaseApp {
   /**
    * Returns the Database service for the specified URL, and the current app.
    *
-   * @return {Database} The Database service instance of this app.
+   * @return {FirebaseDatabase} The Database service instance of this app.
    */
-  public database(url?: string): Database {
+  public database(url?: string): FirebaseDatabase {
     let service: DatabaseService = this.ensureService_('database', () => {
       return new DatabaseService(this);
     });

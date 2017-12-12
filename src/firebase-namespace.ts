@@ -28,7 +28,7 @@ import {
 import {Auth} from './auth/auth';
 import {Messaging} from './messaging/messaging';
 import {Storage} from './storage/storage';
-import {Database} from '@firebase/database';
+import {FirebaseDatabase} from '@firebase/database-types';
 import {Firestore} from '@google-cloud/firestore';
 
 const DEFAULT_APP_NAME = '[DEFAULT]';
@@ -294,9 +294,9 @@ export class FirebaseNamespace {
    * Gets the `Database` service namespace. The returned namespace can be used to get the
    * `Database` service for the default app or an explicitly specified app.
    */
-  get database(): FirebaseServiceNamespace<Database> {
+  get database(): FirebaseServiceNamespace<FirebaseDatabase> {
     const ns: FirebaseNamespace = this;
-    let fn: FirebaseServiceNamespace<Database> = (app?: FirebaseApp) => {
+    let fn: FirebaseServiceNamespace<FirebaseDatabase> = (app?: FirebaseApp) => {
       return ns.ensureApp(app).database();
     };
     return Object.assign(fn, require('@firebase/database'));

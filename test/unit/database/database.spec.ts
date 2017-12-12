@@ -22,7 +22,7 @@ import {expect} from 'chai';
 import * as mocks from '../../resources/mocks';
 import {FirebaseApp} from '../../../src/firebase-app';
 import {DatabaseService} from '../../../src/database/database';
-import {Database} from '@firebase/database';
+import {FirebaseDatabase} from '@firebase/database-types';
 
 describe('Database', () => {
   let mockApp: FirebaseApp;
@@ -79,25 +79,25 @@ describe('Database', () => {
 
   describe('getDatabase', () => {
     it('should return the default Database namespace', () => {
-      const db: Database = database.getDatabase();
+      const db: FirebaseDatabase = database.getDatabase();
       expect(db.ref().toString()).to.be.equal('https://databasename.firebaseio.com/');
     });
     
     it('should return the Database namespace', () => {
-      const db: Database = database.getDatabase(mockApp.options.databaseURL);
+      const db: FirebaseDatabase = database.getDatabase(mockApp.options.databaseURL);
       expect(db.ref().toString()).to.be.equal('https://databasename.firebaseio.com/');
     });
 
     it('should return a cached version of Database on subsequent calls', () => {
-      const db1: Database = database.getDatabase(mockApp.options.databaseURL);
-      const db2: Database = database.getDatabase(mockApp.options.databaseURL);
+      const db1: FirebaseDatabase = database.getDatabase(mockApp.options.databaseURL);
+      const db2: FirebaseDatabase = database.getDatabase(mockApp.options.databaseURL);
       expect(db1).to.equal(db2);
       expect(db1.ref().toString()).to.equal('https://databasename.firebaseio.com/');
     });
 
     it('should return a Database instance for the specified URL', () => {
-      const db1: Database = database.getDatabase(mockApp.options.databaseURL);
-      const db2: Database = database.getDatabase('https://other-database.firebaseio.com');
+      const db1: FirebaseDatabase = database.getDatabase(mockApp.options.databaseURL);
+      const db2: FirebaseDatabase = database.getDatabase('https://other-database.firebaseio.com');
       expect(db1.ref().toString()).to.equal('https://databasename.firebaseio.com/');
       expect(db2.ref().toString()).to.equal('https://other-database.firebaseio.com/');
     });

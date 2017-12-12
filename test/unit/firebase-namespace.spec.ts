@@ -32,13 +32,13 @@ import {FirebaseApp} from '../../src/firebase-app';
 import {Auth} from '../../src/auth/auth';
 import {
   enableLogging,
-  Database,
+  FirebaseDatabase,
   DataSnapshot,
   OnDisconnect,
   Query,
   Reference,
   ServerValue,
-} from '@firebase/database';
+} from '@firebase/database-types';
 import {Messaging} from '../../src/messaging/messaging';
 import {Storage} from '../../src/storage/storage';
 import {
@@ -401,44 +401,16 @@ describe('FirebaseNamespace', () => {
 
     it('should return a valid namespace when the default app is initialized', () => {
       let app: FirebaseApp = firebaseNamespace.initializeApp(mocks.appOptions);
-      let db: Database = firebaseNamespace.database();
+      let db: FirebaseDatabase = firebaseNamespace.database();
       expect(db.app).to.be.deep.equal(app);
       return app.delete();
     });
 
     it('should return a valid namespace when the named app is initialized', () => {
       let app: FirebaseApp = firebaseNamespace.initializeApp(mocks.appOptions, 'testApp');
-      let db: Database = firebaseNamespace.database(app);
+      let db: FirebaseDatabase = firebaseNamespace.database(app);
       expect(db.app).to.be.deep.equal(app);
       return app.delete();
-    });
-
-    it('should return a reference to Database type', () => {
-      expect(firebaseNamespace.database.Database).to.be.deep.equal(Database);
-    });
-
-    it('should return a reference to DataSnapshot type', () => {
-      expect(firebaseNamespace.database.DataSnapshot).to.be.deep.equal(DataSnapshot);
-    });
-
-    it('should return a reference to OnDisconnect type', () => {
-      expect(firebaseNamespace.database.OnDisconnect).to.be.deep.equal(OnDisconnect);
-    });
-
-    it('should return a reference to Query type', () => {
-      expect(firebaseNamespace.database.Query).to.be.deep.equal(Query);
-    });
-
-    it('should return a reference to Reference type', () => {
-      expect(firebaseNamespace.database.Reference).to.be.deep.equal(Reference);
-    });
-
-    it('should return a reference to ServerValue type', () => {
-      expect(firebaseNamespace.database.ServerValue).to.be.deep.equal(ServerValue);
-    });
-
-    it('should return a reference to enableLogging function', () => {
-      expect(firebaseNamespace.database.enableLogging).to.be.deep.equal(enableLogging);
     });
   });
 
