@@ -6,6 +6,7 @@
   "license": "Apache-2.0",
   "homepage": "https://firebase.google.com/",
   "scripts": {
+    "build:webpack": "webpack",
     "build": "gulp build",
     "lint": "tslint --project tsconfig-lint.json --format stylish",
     "test": "run-s lint test:unit",
@@ -38,7 +39,7 @@
     "type": "git",
     "url": "https://github.com/firebase/firebase-admin-node"
   },
-  "main": "lib/index.js",
+  "main": "dist/bundle.node.js",
   "files": [
     "lib/",
     "LICENSE",
